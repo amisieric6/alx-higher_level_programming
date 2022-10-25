@@ -1,20 +1,24 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 """
-more class base
+Created on Fri May 29 15:13:37 2020
+@author: Robinson Montes
 """
 
 
 Rectangle = __import__('9-rectangle').Rectangle
 
 
-"""
-Square class
-"""
-
-
 class Square(Rectangle):
-    """ Square Class """
+    """
+    A Square class shape, inheirts from Rectangle and BaseGeometry
+    """
     def __init__(self, size):
-        """ instantiation with size """
+        """"
+        Init function for Square
+        Attributes:
+            size (int): The size of the square
+        """
+        super().__init__(size, size)
+        self.integer_validator("size", size)
         self.__size = size
-        super().__init__(self.__size, self.__size)
