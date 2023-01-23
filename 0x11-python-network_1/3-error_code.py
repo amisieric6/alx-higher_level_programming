@@ -1,15 +1,18 @@
 #!/usr/bin/python3
-""" 
-Script that takes in a URL, send a request to URL, and dispaly body
+# -*- coding: utf-8 -*-
 """
+Created on Mon Aug 24 07:02:53 2020
+@author: Robinson Montes
+"""
+from urllib.request import urlopen
+from urllib.error import HTTPError
+from sys import argv
 
 
 if __name__ == "__main__":
-    import sys
-    from urllib import request, error
-
+    url = argv[1]
     try:
-        with request.urlopen(sys.argv[1]) as resp:
-            print(resp.read().decode('UTF-8'))
-    except error.HTTPError as er:
-        print('Error code:', er.code)
+        with urlopen(url) as response:
+            print(response.read().decode('utf-8'))
+    except HTTPError as e:
+        print('Error code: {}'.format(e.code))
