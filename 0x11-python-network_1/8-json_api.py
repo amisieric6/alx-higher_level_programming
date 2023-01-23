@@ -1,12 +1,25 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 """
-Script that takes in a URL and an email address, sends a POST request to the passed URL
-with the email as a parameter, and finally displays the body of the response
+Created on Mon Aug 24 07:02:53 2020
+@author: Robinson Montes
 """
-import requests
+from requests import post, codes
 from sys import argv
 
-if __name__ == '__main__':
-    payload = {'email': argv[2]}
-    r = requests.post(argv[1], data=payload)
-    print(r.text)
+
+if __name__ == "__main__":
+    url = 'http://0.0.0.0:5000/search_user'
+    if len(argv) > 1:
+        q = {'q': argv[1]}
+    else:
+        q = {'q': ''}
+    response = post(url, data=q)
+    try:
+        obj = response.json()
+        if len(obj) == 0:
+            print('No result')
+        else:
+            print('[{}] {}'.format(obj['id'], obj['name']))
+    except:
+        print('Not a valid JSON')
